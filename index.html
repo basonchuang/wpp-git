@@ -2,14 +2,22 @@
 <head>
   <title>朴實無華</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <script src="search.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    $("document").ready(function(){
+      $("#btnsend").click(function(){
+        sendValue();
+      });
+    });
+    function sendValue(){
+      window.open("SearchResult.html","_blank");
+    }
+  </script>
 </head>
 <body>
-  <form method="get" action="SearchResult.html" onsubmit="return search()">
-    <input type="hidden" name="search" value="search">
-    <input type="search" id="keyword" name="keyword" placeholder="請點這...">
-    <input type="submit" value="搜尋">
-  </form>
+  <input type="search" id="keyword" name="keyword" placeholder="請點這...">
+  <input type="submit" id="btnsend" value="搜尋">
+  <br>
   <br>
   <a href="AboutPuzi.html">關於朴子</a>
   <br>

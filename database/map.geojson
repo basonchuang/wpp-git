@@ -1,0 +1,138 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [23.463821734862833, 120.24731329799295]
+      },
+      "properties": {
+        "id": 1,
+        "name": "火車頭公園",
+        "site": "613嘉義縣朴子市"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [23.46452510146477, 120.24666241148597]
+      },
+      "properties": {
+        "id": 2,
+        "name": "成功餅鋪",
+        "site": "613嘉義縣朴子市光復路25號"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [23.46499256793044, 120.24633726915732]
+      },
+      "properties": {
+        "id": 3,
+        "name": "東石郡役所",
+        "site": "613嘉義縣朴子市光復路33號"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [23.465567409402453, 120.24543439799292]
+      },
+      "properties": {
+        "id": 4,
+        "space_id": "ChIJtVZzVgucbjQRpoOcvlTuaUg",
+        "name": "清木屋",
+        "site": "613嘉義縣朴子市市東路40號"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [23.466458084730096, 120.24441855566428]
+      },
+      "properties": {
+        "id": 5,
+        "name": "麻糬棟",
+        "site": "613嘉義縣朴子市開元路188號對面第一市場 內"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [23.46784654334349, 120.24517889799299]
+      },
+      "properties": {
+        "id": 6,
+        "name": "朴子配天宮",
+        "site": "613嘉義縣朴子市開元路118號"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [23.46801846061232, 120.24848634032176]
+      },
+      "properties": {
+        "id": 7,
+        "name": "朴子市刺繡文化館",
+        "site": "613嘉義縣朴子市文明路10號"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [23.467619684729573, 120.25424544032194]
+      },
+      "properties": {
+        "id": 8,
+        "name": "東石神社",
+        "site": "嘉義縣朴子市山通路2之9號朴子藝術公園內"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [23.467127613653325, 120.25413815196563]
+      },
+      "properties": {
+        "id": 9,
+        "name": "梅嶺美術館",
+        "site": "嘉義縣朴子市山通路2之9號朴子藝術公園內"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [23.4667518432624, 120.25342119799302]
+      },
+      "properties": {
+        "id": 10,
+        "name": "朴子藝術公園",
+        "site": "嘉義縣朴子市山通路2之9號"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [23.459888042754105, 120.24603089799294]
+      },
+      "properties": {
+        "id": 11,
+        "name": "朴子夜市",
+        "site": "613嘉義縣朴子市光復新路"
+      }
+    }
+  ]
+}

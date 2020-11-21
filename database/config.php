@@ -22,6 +22,9 @@
         }
     }
   }
+  function pass($target){
+    echo json_encode($target);
+  }
   function display($class){
     $sql = "SELECT `name` FROM `spots` WHERE class='$class'";
     global $con;
@@ -59,6 +62,9 @@
     while($x=mysqli_fetch_array($result)){
       $return[$count] = $x['name'];
       $count++;
+    }
+    if(!$return){
+      $return = "0";
     }
     echo json_encode($return);
   }

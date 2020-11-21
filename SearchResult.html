@@ -3,10 +3,39 @@
     <title>朴實無華 - 搜尋結果</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-    <script src="search.js"></script>
+    <script type="text/javascript">
+      var keyword = "";
+      try{
+        var refDoc = $(window.opener.document);
+        var value = $("#keyword",refDoc).val();
+        if( value!=null || typeof value != "undefined")
+          keyword = value;
+      } catch(e){
+        keyword = e.message;
+      }
+    </script>
   </head>
   <body>
     <table id="Search" border="3">
     </table>
+    <script type="text/javascript">
+      $.ajax({
+        url: "./database/config.php?method=search&keyword="+keyword,
+        dataType: "json",
+        success: function (data) {
+          var htmls = '';
+          for (var i = 0; i < data.length; i++) {
+            if(data[i]==0){
+              alert("查無此地點");
+              window.close();
+            }
+            else{
+              htmls += '<tr><td><a href="Spots.php?name=' + data[i] + '">' + data[i] + '</a></td></tr>';
+              document.getElementById("Search").innerHTML = '<tr><td>地點名稱</td></tr>' + htmls;
+            }
+          }
+        }
+      });
+    </script>
   </body>
 </html>
