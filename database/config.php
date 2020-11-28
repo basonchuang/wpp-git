@@ -20,6 +20,12 @@
           search($_GET["keyword"]);
           break;
         }
+      case "allspots":
+        allspots();
+        break;
+      case "choosespots":
+        choosespots();
+        break;
     }
   }
   function pass($target){
@@ -67,5 +73,32 @@
       $return = "0";
     }
     echo json_encode($return);
+  }
+  function allspots(){
+    $sql = "SELECT `name` FROM `spots`";
+    global $con;
+    $result = mysqli_query($con,$sql);
+    $return = array();
+    $count = 0;
+
+    while($x=mysqli_fetch_array($result)){
+      $return[$count] = $x['name'];
+      $count++;
+    }
+    if(!$return){
+      $return = "0";
+    }
+    echo json_encode($return);
+  }
+  function choosespots(){
+    session_start();
+    $cart = array();
+    if(isset($_SESSION['cart'])){
+      for($i=0; $i<count($_SESSION['cart']);  $i++){
+        $_SESSION['cart'] = array_unique($_SESSION['cart']);
+        $cart[$i] = $_SESSION['cart'][$i];
+      }
+    }
+    echo json_encode($cart);
   }
 ?>
