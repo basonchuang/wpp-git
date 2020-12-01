@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="dragdrop.css" type="text/css" />
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOURKEY&libraries=directions" defer></script>
   <script>
     $( function() {
       $( "#sortable1, #sortable2" ).sortable({
@@ -12,6 +13,16 @@
       }).disableSelection();
     } );
   </script>
+  <style>
+    #map{
+      height:50%;
+      width:50%;
+    }
+    html,
+    body {
+      height: 100%;
+    }
+  </style>
 </head>
 
 <body>
@@ -20,7 +31,7 @@
   起點：<input type="text" id="origin"><br>
   <ul id="sortable2" class="connectedSortable">
   </ul>
-  交通方式：<select name="travelmode">
+  交通方式：<select id="travelmode">
     <option value="DRIVING">開車</option>
     <option value="BICYCLING">騎單車</option>
     <option value="TRANSIT">大眾運輸</option>
@@ -28,8 +39,8 @@
   </select>
 
   <button type="button" onclick="initialize();calcRoute();">送出選點組合</button>
-
-  <div id="map_canvas" style="width:100%;height:100%"></div>
+  <br><br>
+  <div id="map"></div>
 
   <script type="text/javascript">
     $.ajax({
@@ -74,24 +85,65 @@
     //var directionsService = new google.map.DirectionsService();
     var map;
     var start;
-
-    
-
-    var end = $('#sortable2 li:last-child').text();
+    var end;
     var choosepoints = [];
+    var travelmode;
 
     function initialize(){
-      start = document.getElementById("origin").value ? start = document.getElementById("origin").value : start = '';
+      var directionsService = new google.maps.DirectionsService();
+      var directionsDisplay = new google.maps.DirectionsRenderer();
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 16,
+        center: { lat: 23.4638, lng: 120.2473 }
+      });
+      directionsDisplay.setMap(map);
+
+      //取得html頁面上使用者所填入的start, end, choosepoints, travelmode
+      start = document.getElementById("origin").value;
       $("#sortable2").each(function(){
         $(this).find('li').each(function(){
           choosepoints.push($(this).text());
         });
       });
-      if(start=''){
-        start = choosepoints[choosepoints.length];
-        alert(start);
-      }
-      alert(choosepoints); 
+      end = choosepoints[choosepoints.length-1];
+      start = choosepoints[0];
+      //travelmode = document.getElementById('travelmode').value;
+
+      //將start, end, choosepoints的place_id從geojson檔取出
+      fetch('./database/map.geojson')
+        .then(results => results.json())
+        .then(result => {
+          let res = result.features;
+          let startLatLng, endLatLng;
+          Array.prototype.forEach.call(res,r => {
+            if(r.properties.name == start){
+              startLatLng = new google.maps.LatLng(r.geometry.coordinates[0], r.geometry.coordinates[1]);
+            }
+            if(r.properties.name == end){
+              endLatLng = new google.maps.LatLng(r.geometry.coordinates[0], r.geometry.coordinates[1]);
+            }
+            let travelmode = document.getElementById('travelmode').value;
+
+            var request = {
+              origin:startLatLng,
+              destination:endLatLng,
+              travelMode: travelmode
+            };
+
+            // 繪製路線
+            directionsService.route(request, function (result, status) {
+                if (status == 'OK') {
+                    // 回傳路線上每個步驟的細節
+                    directionsDisplay.setDirections(result);
+                } else {
+                    console.log(status);
+                }
+            });
+          })
+          
+        })
+      //路線request
+      
     }
     function calcRoute(){
       ;
