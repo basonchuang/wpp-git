@@ -16,11 +16,21 @@
 
 <body>
   <ul id="sortable1" class="connectedSortable">
-    <h2>所有地點</h2>
   </ul>
- 
+  起點：<input type="text" id="origin"><br>
   <ul id="sortable2" class="connectedSortable">
   </ul>
+  交通方式：<select name="travelmode">
+    <option value="DRIVING">開車</option>
+    <option value="BICYCLING">騎單車</option>
+    <option value="TRANSIT">大眾運輸</option>
+    <option value="WALKING">步行</option>
+  </select>
+
+  <button type="button" onclick="initialize();calcRoute();">送出選點組合</button>
+
+  <div id="map_canvas" style="width:100%;height:100%"></div>
+
   <script type="text/javascript">
     $.ajax({
       url: "./database/config.php?method=allspots",
@@ -38,7 +48,7 @@
             var excchoose = [];
             for (var i = 0; i < data2.length; i++) {
               all[data2[i]] = true;
-            };
+            }
             for (var i = 0; i < data1.length; i++) {
               if(!all[data1[i]]){
                 excchoose.push(data1[i]);
@@ -59,6 +69,34 @@
         });
       }
     });
+  </script>
+  <script>
+    //var directionsService = new google.map.DirectionsService();
+    var map;
+    var start;
+
+    
+
+    var end = $('#sortable2 li:last-child').text();
+    var choosepoints = [];
+
+    function initialize(){
+      start = document.getElementById("origin").value ? start = document.getElementById("origin").value : start = '';
+      $("#sortable2").each(function(){
+        $(this).find('li').each(function(){
+          choosepoints.push($(this).text());
+        });
+      });
+      if(start=''){
+        start = choosepoints[choosepoints.length];
+        alert(start);
+      }
+      alert(choosepoints); 
+    }
+    function calcRoute(){
+      ;
+    }
+    // for 
   </script>
 </body>
 
